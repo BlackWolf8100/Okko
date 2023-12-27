@@ -8,7 +8,7 @@ import sqlite3
 class My_base():
     def __init__(self, dbfile = None, logger = False):
         if dbfile == None: 
-            with open('C:/api/Mykola/Oкко/credentials.json') as f:
+            with open('C:/api/Mykola/Okko/credentials.json') as f:
                 self.cfg = json.load(f)
         self.dbfile = dbfile
         self.logger = logger
