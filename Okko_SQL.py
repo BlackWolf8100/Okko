@@ -7,14 +7,13 @@ import pandas as pd
 import time
 import json
 
-LOGIN = '11377215'
-PASSWORD = '21j3erwxLnkUJUbM1P7CzMwQyk0opTmZH0iNVJuHxeM='
+
 BASE_API = 'https://gw-online.okko.ua:9443/api/erp'
 
-def loader(url):
-    url = f'{BASE_API}/login'
+def loader(url, LOGIN, PASSWORD):
+    url0 = f'{BASE_API}/login'
     payload = json.dumps({'login': LOGIN, 'password': PASSWORD}, sort_keys=True, indent=4)
-    response = requests.post(url, headers={'Content-Type': 'application/json'}, data=payload)
+    response = requests.post(url0, headers={'Content-Type': 'application/json'}, data=payload)
     
     #print(response.content)
     print(response.status_code)
@@ -67,7 +66,7 @@ def main():
     if date1 < date2:
         url = f'{BASE_API}/transactions?date_from={date1:%Y-%m-%d}&date_to={date2:%Y-%m-%d}&processed_in_bo=true'
         print(url)
-        result = loader(url)
+        result = loader(url, db.cfg['LOGIN'], db.cfg['PASSWORD'])
 
         if result:
             db.export_pd('Okko_data', result, 'append')

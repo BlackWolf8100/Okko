@@ -76,7 +76,7 @@ class My_base():
         self.mydb.close()
         
 
-    def export_pd(self, data, name, if_exists):
+    def export_pd(self, name, data, if_exists):
         df = pd.DataFrame(data)
         engine = create_engine(f'mysql+pymysql://{self.cfg["user"]}:%s@{self.cfg["host"]}/{self.cfg["db"]}' % quote_plus(password=self.cfg['password']))
         df.to_sql(name, con=engine, if_exists=if_exists, index=False)
